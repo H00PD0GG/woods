@@ -14,8 +14,8 @@ GPIO.setup(7, GPIO.IN)
 
 # Use mpr121 class for everything else
 
-mpr121.TOU_THRESH = 0x30
-mpr121.REL_THRESH = 0x33
+mpr121.TOU_THRESH = 0x10
+mpr121.REL_THRESH = 0x13
 mpr121.setup(0x5a)
 
 # User pygame for sounds
@@ -24,19 +24,19 @@ pygame.mixer.pre_init(44100, -16, 12, 512)
 pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
 
 s1 = pygame.mixer.Sound('wow.wav')
-s1.set_volume(.65);
+s1.set_volume(.05);
 s2 = pygame.mixer.Sound('yikes.wav')
-s2.set_volume(.65);
+s2.set_volume(.05);
 s3 = pygame.mixer.Sound('voice.wav')
-s3.set_volume(.65);
+s3.set_volume(.05);
 s4 = pygame.mixer.Sound('bark.wav')
-s4.set_volume(.65);
+s4.set_volume(.05);
 s5 = pygame.mixer.Sound('electric.wav')
-s5.set_volume(.65);
+s5.set_volume(.05);
 s6 = pygame.mixer.Sound('cashtill.wav')
-s6.set_volume(.65);
+s6.set_volume(.05);
 s7 = pygame.mixer.Sound('free-dark-lord-sci-fi-sound.wav')
-s7.set_volume(.65);
+s7.set_volume(.05);
 
 
 # Track touches
