@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 
-"""woods.py: Based on Beetbox script for the BeetBox by Scott Garner."""
+#Python script based on Scott Garners Beetbox and SKpang Ledchaser
 
 import pygame
-
 import RPi.GPIO as GPIO
 import mpr121
+import smbus
+import sys
+import getopt
+import time
+
+bus = smbus.SMBus(1)
+address = 0x20
+bus.write_byte_data(0x20,0x00,0x00) #Bank A as Outputs
+bus.write_byte_data(0x20,0x01,0x00) #Bank B as Outputs
 
 # Use GPIO Interrupt Pin
 
@@ -41,7 +49,17 @@ s7.set_volume(.05);
 
 # Track touches
 
-touches = [0,0,0,0,0,0,0,0,0,0,0,0];
+touches = [0,0,0,0,0,0,0,0];
+
+def set_led(data,bank):
+	if bank == 1:
+		bus.write_byte_data(address,0x12,data)
+        else:
+                bus.write_byte_data(address,0x13,data)
+        return
+
+delay = 0.5
+
 
 while True:
 
@@ -51,7 +69,7 @@ while True:
 
 		touchData = mpr121.readData(0x5a)
 
-		for i in range(12):
+		for i in range(8):
 			if (touchData & (1<<i)):
 
 				if (touches[i] == 0):
@@ -60,30 +78,37 @@ while True:
 
 					if (i == 0):
 						s1.play()
+						set_led(1,0)
+						time.sleep(delay)
 					elif (i == 1):
 						s2.play()
+						set_led(2,0)
+						time.sleep(delay)
 					elif (i == 2):
 						s3.play()
+						set_led(4,0)
+						time.sleep(delay)
 					elif (i == 3):
 						s4.play()
+						set_led(8,0)
+						time.sleep(delay)
 					elif (i == 4):
 						s5.play()
+						set_led(16,0)
+						time.sleep(delay)
 					elif (i == 5):
 						s6.play()
+						set_led(32,0)
+						time.sleep(delay)
 					elif (i == 6):
 						s6.play()
+						set_led(64,0)
+						time.sleep(delay)
 					elif (i == 7):
 						s7.play()
-					elif (i == 8):
-						s1.play()
-					elif (i == 9):
-						s2.play()
-					elif (i == 10):
-						s3.play()
-					elif (i == 11):
-						s4.play()
-					elif (i == 12):
-						s5.play()
+						set_led(128,0)
+						time.sleep(delay)
+					
 				touches[i] = 1;
 			else:
 				if (touches[i] == 1):
