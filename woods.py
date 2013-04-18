@@ -41,7 +41,7 @@ s7.set_volume(.65);
 
 # Track touches
 
-touches = [0,0,0,0,0,0];
+touches = [0,0,0,0,0,0,0,0,0,0,0,0];
 
 while True:
 
@@ -51,7 +51,7 @@ while True:
 
 		touchData = mpr121.readData(0x5a)
 
-		for i in range(6):
+		for i in range(12):
 			if (touchData & (1<<i)):
 
 				if (touches[i] == 0):
@@ -72,6 +72,18 @@ while True:
 						s6.play()
 					elif (i == 6):
 						s6.play()
+					elif (i == 7):
+						s7.play()
+					elif (i == 8):
+						s1.play()
+					elif (i == 9):
+						s2.play()
+					elif (i == 10):
+						s3.play()
+					elif (i == 11):
+						s4.play()
+					elif (i == 12):
+						s5.play()
 				touches[i] = 1;
 			else:
 				if (touches[i] == 1):
