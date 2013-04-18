@@ -21,7 +21,7 @@ mpr121.setup(0x5a)
 # User pygame for sounds
 
 pygame.mixer.pre_init(44100, -16, 12, 512)
-pygame.init(frequency=22050, size=-16, channels=2, buffer=4096)
+pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
 
 s1 = pygame.mixer.Sound('wow.wav')
 s1.set_volume(.65);
